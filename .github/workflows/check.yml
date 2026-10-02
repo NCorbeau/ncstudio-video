@@ -1,0 +1,31 @@
+name: Check renderer
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - name: Render all bundled examples
+        run: |
+          npm run render:quiz -- --scale=0.25 --concurrency=2
+          npm run render:ranking -- --scale=0.25 --concurrency=2
+          npm run render:captioned -- --scale=0.25 --concurrency=2
+      - uses: actions/upload-artifact@v4
+        with:
+          name: demo-renders
+          path: out/*.mp4
+          retention-days: 7

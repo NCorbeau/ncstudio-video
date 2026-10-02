@@ -1,0 +1,57 @@
+{
+  "name": "ncstudio-video",
+  "version": "1.0.0",
+  "dependencies": {
+    "@remotion/animation-utils": "4.0.532",
+    "@remotion/cli": "4.0.532",
+    "@remotion/lambda": "4.0.532",
+    "@remotion/layout-utils": "4.0.532",
+    "@remotion/media-utils": "4.0.532",
+    "@remotion/transitions": "4.0.532",
+    "@remotion/zod-types": "4.0.532",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remotion": "4.0.532",
+    "remotion-animated": "^2.1.1",
+    "zod": "4.5.4"
+  },
+  "devDependencies": {
+    "@remotion/eslint-config": "4.0.532",
+    "@remotion/eslint-plugin": "^4.0.532",
+    "@remotion/install-whisper-cpp": "4.0.532",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@types/web": "^0.0.143",
+    "@typescript-eslint/eslint-plugin": "^8.71.0",
+    "@typescript-eslint/parser": "^8.71.0",
+    "eslint": "^8.43.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "prettier": "^3.2.5",
+    "tsx": "4.23.15",
+    "typescript": "^5.4.5"
+  },
+  "scripts": {
+    "start": "remotion studio",
+    "upgrade": "remotion upgrade",
+    "test": "npm run lint && npm run typecheck && npm run test:unit",
+    "create-subtitles": "node sub.mjs",
+    "function:deploy": "remotion lambda functions deploy --disk 10240",
+    "deploy": "remotion lambda sites create src/index.ts --site-name ncstudio-video",
+    "render:local": "remotion render BasicQuiz",
+    "render:lambda": "node scripts/render-lambda.mjs",
+    "dev": "remotion studio",
+    "lint": "eslint src --ext ts,tsx,js,jsx --max-warnings=0",
+    "typecheck": "tsc --noEmit",
+    "test:unit": "tsx --test tests/*.test.ts",
+    "bundle": "remotion bundle src/index.ts",
+    "check": "npm test && npm run bundle",
+    "render:quiz": "remotion render BasicQuiz out/quiz.mp4",
+    "render:ranking": "remotion render Ranking out/ranking.mp4",
+    "render:captioned": "remotion render CaptionedVideo out/captioned.mp4",
+    "render:demos": "npm run render:quiz && npm run render:ranking && npm run render:captioned"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

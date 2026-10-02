@@ -1,0 +1,21 @@
+node_modules/
+dist/
+build/
+temp/
+.DS_Store
+
+# Deployment configuration and credentials belong in local environments or a secret store.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Local renders, downloaded speech models, and production input/media.
+out/
+whisper.cpp/
+private/
+private-inputs/
+public/private/
+
+# Bundled public/demo fixtures are intentionally tracked.
